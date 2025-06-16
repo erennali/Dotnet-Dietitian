@@ -63,11 +63,11 @@ class ContactsService {
             
             // First try the dedicated message contacts endpoints
             if (userType === 'diyetisyen' || userType === 'dietitian') {
-                url = `/api/Mesaj/contacts/diyetisyen/${this.currentUserId}`;
-                fallbackUrl = `/api/Diyetisyen/${this.currentUserId}/hastalar`;
+                url = `/api/Messages/contacts/diyetisyen/${this.currentUserId}`;
+                fallbackUrl = `/api/Dietitians/${this.currentUserId}/hastalar`;
             } else if (userType === 'hasta' || userType === 'patient') {
-                url = `/api/Mesaj/contacts/hasta/${this.currentUserId}`;
-                fallbackUrl = `/api/Hasta/${this.currentUserId}/diyetisyen`;
+                url = `/api/Messages/contacts/hasta/${this.currentUserId}`;
+                fallbackUrl = `/api/Patients/${this.currentUserId}/diyetisyen`;
             } else {
                 console.error('Unsupported user type:', this.currentUserType);
                 return;
@@ -682,7 +682,7 @@ class ContactsService {
             
             // Check API connectivity
             try {
-                const testResponse = await fetch('/api/Mesaj/unread?userId=' + this.currentUserId + '&userType=' + encodeURIComponent(this.currentUserType), {
+                const testResponse = await fetch('/api/Messages/unread?userId=' + this.currentUserId + '&userType=' + encodeURIComponent(this.currentUserType), {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
